@@ -1,0 +1,37 @@
+version: '3.9.0'
+
+services:
+  kuksa.val:
+    image: ghcr.io/smaddis/kuksa-val:0.2.0
+    networks:
+      - khghaffa23-net
+    ports:
+      - "8090:8090"
+
+  f1demo2val:
+    image: docker-registry.rahti.csc.fi/finalprojecttask1/f1demo2val:1.0
+    depends_on:
+      - kuksa.val
+    networks:
+      - khghaffa23-net
+    environment:
+      - KUKSAVAL_HOST=kuksa.val
+      - KUKSAVAL_PORT=8090
+
+  val2mqtt:
+    image: docker-registry.rahti.csc.fi/finalprojecttask1/val2mqtt:1.0
+    depends_on:
+      - kuksa.val
+    networks:
+      - khghaffa23-net
+    environment:
+      - KUKSAVAL_HOST=kuksa.val
+      - KUKSAVAL_PORT=8090
+      - MQTT_URL=mqtt.khghaffa23.rahtiapp.fi
+      - MQTT_PORT=443
+      - TOPIC_PREFIX=khghaffa23
+
+networks:
+  khghaffa23-net:
+    name: khghaffa23-net
+    driver: bridge

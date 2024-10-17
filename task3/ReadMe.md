@@ -49,7 +49,7 @@ This file contains the configurations for deploying Prometheus and Grafana. It i
    ```bash
    oc process -f prometheus-grafana.yaml | oc apply -f -
    ```
-- Ensure to replace the environment variables for PROMETHEUS_IMAGE, GRAFANA_IMAGE, BASIC_AUTH_USERNAME, and BASIC_AUTH_PASSWORD as required.
+Ensure to replace the environment variables for PROMETHEUS_IMAGE, GRAFANA_IMAGE, BASIC_AUTH_USERNAME, and BASIC_AUTH_PASSWORD as required.
 
 4. Access Grafana: Once deployed, you can access Grafana using the provided credentials in the prometheus-grafana.yaml file.
 

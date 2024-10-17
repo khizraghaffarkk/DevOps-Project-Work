@@ -1,5 +1,5 @@
-## Task 2: Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
-This task involves setting up a monitoring and observability stack for monitoring system metrics using Prometheus, Grafana, Mosquitto exporter, and Node exporter.
+Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
+This project involves setting up a monitoring and observability stack for monitoring system metrics using Prometheus, Grafana, Mosquitto exporter, and Node exporter.
 
 ## Project Overview
 This repository contains Kubernetes deployment and service configurations to set up a monitoring stack. The main components involved are:

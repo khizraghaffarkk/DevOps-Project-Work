@@ -1,28 +1,36 @@
-# DevOps Project - Task 2
+Task 2: Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
+This task involves setting up a monitoring and observability stack for monitoring system metrics using Prometheus, Grafana, Mosquitto exporter, and Node exporter.
 
-## Overview
+Project Overview
+This repository contains Kubernetes deployment and service configurations to set up a monitoring stack. The main components involved are:
 
-This repository contains the configuration files and templates necessary for setting up a monitoring system using **Prometheus**, **Grafana**, **Mosquitto Exporter**, and **Node Exporter**. The project aims to facilitate the monitoring of applications and services running within a Kubernetes cluster.
+Prometheus: Used to scrape and store time-series data.
+Grafana: Visualizes the data stored in Prometheus.
+Mosquitto Exporter: Exports metrics from Mosquitto broker.
+Node Exporter: Exports hardware and OS metrics for monitoring system resources.
+The deployment files are organized as follows:
 
-## Contents
+exporter.yaml: Defines the deployment and service for Mosquitto exporter.
+node-exporter.yaml: Contains the deployment and service for Node exporter.
+prometheus-grafana.yaml: Configures Prometheus and Grafana deployments along with necessary credentials, scraping rules, and configurations for monitoring.
+Files in the Repository
+exporter.yaml
+This file configures the Mosquitto exporter as a Kubernetes deployment and service:
 
-- `exporter.yaml`: Configuration for deploying Mosquitto Exporter.
-- `node-exporter.yaml`: Configuration for deploying Node Exporter.
-- `prometheus-grafana.yaml`: Template for deploying Prometheus and Grafana, including the necessary configurations for monitoring metrics.
+Deployment: Runs a container of sapcc/mosquitto-exporter to collect metrics from the Mosquitto broker.
+Service: Exposes the exporter on port 9234 for Prometheus to scrape.
+node-exporter.yaml
+This file defines the Node exporter setup:
 
-## Task 2 Description
+Deployment: Deploys the prom/node-exporter container to collect OS and hardware metrics.
+Service: Exposes Node exporter on port 9100.
+prometheus-grafana.yaml
+This file contains the configurations for deploying Prometheus and Grafana. It includes:
 
-### Objective
+Prometheus: Configured to scrape metrics from Node exporter, Mosquitto exporter, and other applications running in the namespace.
+Grafana: Provides a web interface for visualizing Prometheus metrics, including dashboard setup for system and broker metrics.
 
-The objective of Task 2 is to set up a monitoring solution that includes the following components:
-
-- **Mosquitto Exporter**: To collect metrics from a Mosquitto MQTT broker.
-- **Node Exporter**: To expose hardware and OS metrics from the host machine.
-- **Prometheus**: To scrape and store metrics data.
-- **Grafana**: To visualize the metrics collected by Prometheus.
-
-### Setup Instructions
-
+## How to Deploy
 1. **Deploy Mosquitto Exporter**:
    Use the `exporter.yaml` file to deploy the Mosquitto Exporter. This will create a deployment and a service to expose metrics.
 
@@ -40,7 +48,11 @@ The objective of Task 2 is to set up a monitoring solution that includes the fol
    oc process -f prometheus-grafana.yaml | oc apply -f -
    ```
 - Ensure to replace the environment variables for PROMETHEUS_IMAGE, GRAFANA_IMAGE, BASIC_AUTH_USERNAME, and BASIC_AUTH_PASSWORD as required.
+- 
+4. Access Grafana: Once deployed, you can access Grafana using the provided credentials in the prometheus-grafana.yaml file.
 
+5. Add Targets to Prometheus: Add the necessary annotations to your applications’ pods for Prometheus to scrape metrics from them.
+   
 ## Accessing Prometheus and Grafana
 After deploying the above configurations, you will be able to access Prometheus and Grafana through the OpenShift project overview page.
 
@@ -62,84 +74,9 @@ annotations:
   prometheus.io/path: <path>  # Optional, defaults to '/metrics'
   prometheus.io/port: <port>    # Optional, defaults to the pod's declared port
 
+Links for Grafana & Prometheus
+Grafana: Grafana Dashboard
+Mosquitto Broker Dashboard: Mosquitto Broker Dashboard
+Node-Exporter Full Dashboard: Node-Exporter Full Dashboard
+Prometheus: Prometheus Metrics
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-====================================
-oc new-app --template=openshift/prometheus-grafana -p NAMESPACE=csc_project_name
-
-oc new-project csc_project_name --description="This is Project Work"
-
-oc new-app -f ./prometheus-grafana.yaml -p NAMESPACE=csc_project_name
-
-oc apply -f ./prometheus-grafana.yaml -n csc_project_name
-
-
-kubectl get configmap prometheus-config -n csc_project_name -o yaml
-
----------- exporter.yaml------------
-oc apply -f exporter.yaml
-oc logs mosquitto-exporter-<pod-id>
-
-oc apply -f node-exporter.yaml
-
-oc apply -f prometheus-grafana.yaml
-
-Mosquitto Broker Dashboard: 
-https://grafana-route-t3testing.rahtiapp.fi/d/wTMoiOPZka/mosquitto-broker?orgId=1&refresh=5s
-
-Node-Exporter-Dashboard:
-https://grafana-route-t3testing.rahtiapp.fi/d/rYdddlPWk/node-exporter-full?orgId=1&var-datasource=prometheus&var-job=node-exporter&var-node=node-exporter-service.t3testing.svc:9100&var-diskdevices=%5Ba-z%5D%2B%7Cnvme%5B0-9%5D%2Bn%5B0-9%5D%2B%7Cmmcblk%5B0-9%5D%2B
-
-Grafana Dashboard:
-       
-Prometheus Dasboard:
-
-------------
-Delete the Routes:
-
-oc delete route grafana-route -n csc_project_name
-oc delete route prometheus-route -n csc_project_name
-
-Delete Deployments:
-
-oc delete deployment grafana-1 -n csc_project_name
-oc delete deployment mosquitto-exporter -n csc_project_name
-oc delete deployment prometheus-1 -n csc_project_name
-Delete Services:
-
-Delete Services:
-
-oc delete service grafana-service -n csc_project_name
-oc delete service mosquitto-exporter-service -n csc_project_name
-oc delete service prometheus-service -n csc_project_name
-Delete Persistent Volume Claims (if applicable):
-
-Delete Persistent Volume Claims (if applicable):
-
-oc delete pvc grafana-data -n csc_project_name
-oc delete pvc prometheus-data -n csc_project_name
-Delete ConfigMaps and Secrets:
-
-Delete ConfigMaps and Secrets:
-
-oc delete configmap grafana-config -n csc_project_name
-oc delete configmap prometheus-config -n csc_project_name
-
-oc delete secret grafana-secret -n csc_project_name
-Verify that Resources are Deleted:
-
-oc get all -n csc_project_name
-
-oc logs <grafana-pod>

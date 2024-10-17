@@ -1,34 +1,36 @@
-Task 2: Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
+## Task 2: Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
 This task involves setting up a monitoring and observability stack for monitoring system metrics using Prometheus, Grafana, Mosquitto exporter, and Node exporter.
 
-Project Overview
+## Project Overview
 This repository contains Kubernetes deployment and service configurations to set up a monitoring stack. The main components involved are:
 
-Prometheus: Used to scrape and store time-series data.
-Grafana: Visualizes the data stored in Prometheus.
-Mosquitto Exporter: Exports metrics from Mosquitto broker.
-Node Exporter: Exports hardware and OS metrics for monitoring system resources.
+**Prometheus:** Used to scrape and store time-series data.
+**Grafana:** Visualizes the data stored in Prometheus.
+**Mosquitto Exporter:** Exports metrics from Mosquitto broker.
+**Node Exporter:** Exports hardware and OS metrics for monitoring system resources.
+
 The deployment files are organized as follows:
 
-exporter.yaml: Defines the deployment and service for Mosquitto exporter.
-node-exporter.yaml: Contains the deployment and service for Node exporter.
-prometheus-grafana.yaml: Configures Prometheus and Grafana deployments along with necessary credentials, scraping rules, and configurations for monitoring.
-Files in the Repository
-exporter.yaml
+**exporter.yaml:** Defines the deployment and service for Mosquitto exporter.
+**node-exporter.yaml:** Contains the deployment and service for Node exporter.
+**prometheus-grafana.yaml:** Configures Prometheus and Grafana deployments along with necessary credentials, scraping rules, and configurations for monitoring.
+
+## Files in the Repository
+**exporter.yaml**
 This file configures the Mosquitto exporter as a Kubernetes deployment and service:
 
-Deployment: Runs a container of sapcc/mosquitto-exporter to collect metrics from the Mosquitto broker.
-Service: Exposes the exporter on port 9234 for Prometheus to scrape.
-node-exporter.yaml
+- Deployment: Runs a container of sapcc/mosquitto-exporter to collect metrics from the Mosquitto broker.
+- Service: Exposes the exporter on port 9234 for Prometheus to scrape.
+**node-exporter.yaml**
 This file defines the Node exporter setup:
 
-Deployment: Deploys the prom/node-exporter container to collect OS and hardware metrics.
-Service: Exposes Node exporter on port 9100.
-prometheus-grafana.yaml
+- Deployment: Deploys the prom/node-exporter container to collect OS and hardware metrics.
+- Service: Exposes Node exporter on port 9100.
+**prometheus-grafana.yaml**
 This file contains the configurations for deploying Prometheus and Grafana. It includes:
 
-Prometheus: Configured to scrape metrics from Node exporter, Mosquitto exporter, and other applications running in the namespace.
-Grafana: Provides a web interface for visualizing Prometheus metrics, including dashboard setup for system and broker metrics.
+- Prometheus: Configured to scrape metrics from Node exporter, Mosquitto exporter, and other applications running in the namespace.
+- Grafana: Provides a web interface for visualizing Prometheus metrics, including dashboard setup for system and broker metrics.
 
 ## How to Deploy
 1. **Deploy Mosquitto Exporter**:
@@ -74,7 +76,7 @@ annotations:
   prometheus.io/path: <path>  # Optional, defaults to '/metrics'
   prometheus.io/port: <port>    # Optional, defaults to the pod's declared port
 
-Links for Grafana & Prometheus
+## Links for Grafana & Prometheus
 Grafana: Grafana Dashboard
 Mosquitto Broker Dashboard: Mosquitto Broker Dashboard
 Node-Exporter Full Dashboard: Node-Exporter Full Dashboard

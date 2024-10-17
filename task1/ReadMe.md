@@ -45,20 +45,3 @@ You can check the messages received on the Kuksa Server by running the command:
 mosquitto_sub -t "khghaffa23/#" --cafile ca.crt --insecure --host mqtt.khghaffa23.rahtiapp.fi --port 443 -v
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-mosquitto_sub -h mqtt.khghaffa23.rahtiapp.fi -p 443 --cafile ca.crt -t "khghaffa23/#"
-
-mosquitto_sub -h mqtt.khghaffa23.rahtiapp.fi -p 443 --cafile D:\check\test\pwtask1\val2mqtt\ca.crt -t "khghaffa23/#"

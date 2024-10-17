@@ -4,20 +4,10 @@ This task involves setting up a monitoring and observability stack for monitorin
 ## Project Overview
 This repository contains Kubernetes deployment and service configurations to set up a monitoring stack. The main components involved are:
 
-**Prometheus:** Used to scrape and store time-series data.
-**Grafana:** Visualizes the data stored in Prometheus.
-**Mosquitto Exporter:** Exports metrics from Mosquitto broker.
-**Node Exporter:** Exports hardware and OS metrics for monitoring system resources.
-
-The deployment files are organized as follows:
-
-
-**exporter.yaml:** Defines the deployment and service for Mosquitto exporter.
-
-**node-exporter.yaml:** Contains the deployment and service for Node exporter.
-
-**prometheus-grafana.yaml:** Configures Prometheus and Grafana deployments along with necessary credentials, scraping rules, and configurations for monitoring.
-
+- **Prometheus:** Used to scrape and store time-series data.
+- **Grafana:** Visualizes the data stored in Prometheus.
+- **Mosquitto Exporter:** Exports metrics from Mosquitto broker.
+- **Node Exporter:** Exports hardware and OS metrics for monitoring system resources.
 
 ## Files in the Repository
 **exporter.yaml**
@@ -87,8 +77,9 @@ annotations:
   prometheus.io/port: <port>    # Optional, defaults to the pod's declared port
 ```
 ## Links for Grafana & Prometheus
-Grafana: Grafana Dashboard
-Mosquitto Broker Dashboard: Mosquitto Broker Dashboard
-Node-Exporter Full Dashboard: Node-Exporter Full Dashboard
-Prometheus: Prometheus Metrics
+- Grafana: [Grafana Dashboard](https://grafana-route-t3testing.rahtiapp.fi/)
+- Mosquitto Broker Dashboard: [Mosquitto Broker Dashboard](https://grafana-route-t3testing.rahtiapp.fi/d/wTMoiOPZka/mosquittobroker?orgId=1&refresh=5s)
+- Node-Exporter Full Dashboard: [Node-Exporter Full Dashboard](https://grafana-route-t3testing.rahtiapp.fi/d/rYdddlPWk/node-exporter-full?orgId=1)
+- Prometheus: [Prometheus Metrics](https://prometheus-route-t3testing.rahtiapp.fi/)
+
 

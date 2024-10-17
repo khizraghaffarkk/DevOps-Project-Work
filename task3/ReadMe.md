@@ -44,6 +44,41 @@ This file contains the configurations for deploying Prometheus and Grafana. It i
   
 - Grafana: Provides a web interface for visualizing Prometheus metrics, including dashboard setup for system and broker metrics.
 
+
+===Project Overview
+This repository contains Kubernetes deployment and service configurations that facilitate the creation of a comprehensive monitoring stack. The main components of this setup include:
+
+Prometheus: A powerful tool for scraping and storing time-series data.
+Grafana: An advanced visualization tool that transforms Prometheus data into insightful graphs and dashboards.
+Mosquitto Exporter: A specialized exporter that gathers metrics from the Mosquitto broker.
+Node Exporter: A tool designed to export hardware and OS metrics for effective monitoring of system resources.
+🗂️ File Structure
+The deployment files are organized for easy navigation:
+
+exporter.yaml:
+Defines the deployment and service for the Mosquitto Exporter.
+node-exporter.yaml:
+Contains the deployment and service configurations for the Node Exporter.
+prometheus-grafana.yaml:
+Configures the deployments for Prometheus and Grafana, including necessary credentials and scraping rules.
+📁 Files in the Repository
+exporter.yaml
+This file configures the Mosquitto Exporter as a Kubernetes deployment and service:
+
+Deployment: Runs a container of sapcc/mosquitto-exporter to collect metrics from the Mosquitto broker.
+Service: Exposes the exporter on port 9234 for Prometheus to scrape.
+node-exporter.yaml
+This file defines the Node Exporter setup:
+
+Deployment: Deploys the prom/node-exporter container to collect OS and hardware metrics.
+Service: Exposes Node Exporter on port 9100.
+prometheus-grafana.yaml
+This file contains the configurations for deploying Prometheus and Grafana. It includes:
+
+Prometheus: Configured to scrape metrics from the Node Exporter, Mosquitto Exporter, and other applications running in the namespace.
+Grafana: Provides a web interface for visualizing Prometheus metrics, including a dashboard setup for system and broker metrics.
+
+
 ## How to Deploy
 1. **Deploy Mosquitto Exporter**:
    Use the `exporter.yaml` file to deploy the Mosquitto Exporter. This will create a deployment and a service to expose metrics.

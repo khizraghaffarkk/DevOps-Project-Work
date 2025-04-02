@@ -1,4 +1,4 @@
-Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
+## Prometheus, Node Exporter, Mosquitto Exporter, and Grafana Setup
 This project involves setting up a monitoring and observability stack for monitoring system metrics using Prometheus, Grafana, Mosquitto exporter, and Node exporter.
 
 ## Project Overview
